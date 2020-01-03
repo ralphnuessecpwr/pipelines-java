@@ -1,3 +1,4 @@
+[![Build Status](https://dev.azure.com/ralphnuesse/ralphnuesse/_apis/build/status/ralphnuessecpwr.pipelines-java?branchName=master)](https://dev.azure.com/ralphnuesse/ralphnuesse/_build/latest?definitionId=1&branchName=master)
 
 # Contributing
 
