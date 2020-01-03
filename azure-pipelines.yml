@@ -13,3 +13,4 @@ steps:
 - task: PowerShell@2
   inputs:
     filePath: 'C:\Users\cwde-rnuesse.EMEA\Software\Azure DevOps Scripts\Test script.ps1'
+    arguments: 'HDDRXM0.DEMO.COB.BATCH'
