@@ -7,10 +7,9 @@ trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: 'Default'
 
 steps:
-
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
