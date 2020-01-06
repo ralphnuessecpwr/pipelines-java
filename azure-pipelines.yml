@@ -19,7 +19,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      $downloader = [SCM_Downloader]::new($(hostPdsName))
+      $downloader = [SCM_Downloader]::new('$(hostPdsName)')
       $downloader.download()
       
       Class SCM_Downloader{
