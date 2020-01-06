@@ -13,12 +13,12 @@ steps:
 - task: PowerShell@2
   inputs:
     filePath: 'C:\Users\cwde-rnuesse.EMEA\Software\Azure_DevOps_Scripts\Download.ps1'
-    arguments: $(hostSourcesPds)
+    arguments: '$(hostSourcesPds) cbl'
 
 - task: PowerShell@2
   inputs:
     filePath: 'C:\Users\cwde-rnuesse.EMEA\Software\Azure_DevOps_Scripts\Download.ps1'
-    arguments: $(hostCopyPds)
+    arguments: '$(hostCopyPds) cpy'
 
 #- task: PowerShell@2
 #  inputs:
