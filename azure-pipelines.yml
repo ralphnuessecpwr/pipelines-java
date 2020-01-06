@@ -19,49 +19,14 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      $downloader = [SCM_Downloader]::new('$(hostPdsName)')
-      $downloader.download()
+      [string]$hostPdsName = $(hostPdsName)
+      [string]$cliPath = "C:\Users\cwde-rnuesse.EMEA\Software\Compuware\TopazCLI\"
+      [string]$downloadType = "pds"
+      [string]$hostUri = "cwcc.compuware.com"
+      [string]$hostPort = "16196"
+      [string]$hostCodePage = "1047"
+      [string]$hostUser = "hddrxm0"
+      [string]$hostPassword = "cpwr2001"
+      [string]$extension = "cbl"
       
-      Class SCM_Downloader{
-      
-          [string]$cliPath
-          [string]$downloadType
-          [string]$hostUri
-          [string]$hostPort
-          [string]$hostCodepage
-          [string]$hostUser
-          [string]$hostPassword
-          [string]$extension
-          [string]$hostPdsName
-      
-          SCM_Downloader([string] $hostPdsName)
-          {
-              $this.cliPath = "C:\Users\cwde-rnuesse.EMEA\Software\Compuware\TopazCLI\"
-              $this.downloadType = "pds"
-              $this.hostUri = "cwcc.compuware.com"
-              $this.hostPort = "16196"
-              $this.hostCodePage = "1047"
-              $this.hostUser = "hddrxm0"
-              $this.hostPassword = "cpwr2001"
-              $this.extension = "cbl"
-              $this.hostPdsName = $hostPdsName
-          }
-      
-          download()
-          {
-              $command = $this.cliPath + "SCMDownloaderCLI.bat" + 
-                  " -host " + $this.hostUri +
-                  " -port " + $this.hostPort +
-                  " -id " + $this.hostUser +
-                  " -pass " + $this.hostPassword +
-                  " -code " + $this.hostCodePage +
-                  " -timeout 0" + 
-                  " -scm " + $this.downloadType +
-                  " -targetFolder " + ".\MF_Sources" +
-                  " -data " + ".\workspace\Test\TopazCliWkspc1e290c49-0de6-44c4-b8d2-01d0cb40a835" +
-                  " -filter " + $this.hostPdsName +
-                  " -ext " + $this.extension
-      
-              iex $command
-          }
-      }
+      C:\Users\cwde-rnuesse.EMEA\Software\Compuware\TopazCLI\SCMDownloaderCLI.bat -host $hostUri -port $hostPort -id $hostUser -pass $hostPassword -code $hostCodePage -timeout 0 -scm $downloadType -targetFolder .\MF_Sources -data .\workspace\Test\TopazCliWkspc -filter $hostPdsName -ext $extension
