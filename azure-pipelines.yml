@@ -19,7 +19,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      [string]$hostPdsName = $(hostPdsName)
+      [string]$hostPdsName = '$(hostPdsName)'
       [string]$cliPath = "C:\Users\cwde-rnuesse.EMEA\Software\Compuware\TopazCLI\"
       [string]$downloadType = "pds"
       [string]$hostUri = "cwcc.compuware.com"
