@@ -7,7 +7,7 @@ pool:
 variables:
   sonarProjectName: 'RNU_Azure_ISPW'
   sonarBaseDir: 'C:\Users\cwde-rnuesse.EMEA\Software\Azure_DevOps_Workspace'
-  sonarSources: '.\MF_Sources'
+  sonarSources: '.\$(ispwApplication)\MF_Source'
 
 steps:
 - task: PowerShell@2
