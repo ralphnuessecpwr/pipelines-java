@@ -10,20 +10,15 @@ pool:
   name: 'Default'
 
 variables:
-  sonarProjectName: 'RNU_Azure'
+  sonarProjectName: 'RNU_Azure_ISPW'
   sonarBaseDir: 'C:\Users\cwde-rnuesse.EMEA\Software\Azure_DevOps_Workspace'
   sonarSources: '.\MF_Sources'
 
 steps:
 - task: PowerShell@2
   inputs:
-    filePath: 'C:\Users\cwde-rnuesse.EMEA\Software\Azure_DevOps_Scripts\Download.ps1'
-    arguments: '$(hostSourcesPds) cbl'
-
-- task: PowerShell@2
-  inputs:
-    filePath: 'C:\Users\cwde-rnuesse.EMEA\Software\Azure_DevOps_Scripts\Download.ps1'
-    arguments: '$(hostCopyPds) cpy'
+    filePath: 'C:\Users\cwde-rnuesse.EMEA\Software\Azure_DevOps_Scripts\Download_ispw.ps1'
+    arguments: '$(ispwContainerName) $(ispwContainerType) $(ispwLevel)'
 
 - task: BatchScript@1
   inputs:
