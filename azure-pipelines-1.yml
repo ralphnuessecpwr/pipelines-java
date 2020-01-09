@@ -12,7 +12,7 @@ variables:
 steps:
 - task: PowerShell@2
   inputs:
-    filePath: 'C:\Users\cwde-rnuesse.EMEA\Software\Azure_DevOps_Scripts\Download_ispw.ps1'
+    filePath: 'C:\Users\cwde-rnuesse.EMEA\Software\Azure_DevOps_Scripts\Download_ispw_cont.ps1'
     arguments: '$(ispwContainerName) $(ispwContainerType) $(ispwLevel)'
 
 - task: BatchScript@1
