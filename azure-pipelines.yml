@@ -11,7 +11,7 @@ pool:
 
 variables:
   sonarProjectName: 'RNU_Azure'
-  sonarBaseDir: 'C:\Users\cwde-rnuesse.EMEA\Software\Azure_DevOps_Scripts'
+  sonarBaseDir: 'C:\Users\cwde-rnuesse.EMEA\Software\Azure_DevOps_Workspace'
   sonarSources: '.\MF_Sources'
 
 steps:
