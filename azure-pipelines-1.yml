@@ -24,3 +24,7 @@ steps:
   inputs:
     filename: 'C:\Users\cwde-rnuesse.EMEA\Software\Sonar\Scanner\bin\sonar-scanner'
     arguments: '-Dsonar.projectBaseDir=$(workspaceRoot) -Dsonar.projectKey=$(sonarProjectName) -Dsonar.projectName=$(sonarProjectName) -Dsonar.projectVersion=1.0 -Dsonar.sources=$(sonarSources) -Dsonar.cobol.copy.directories=$(sonarSources) -Dsonar.cobol.copy.suffixes=cpy -Dsonar.cobol.file.suffixes=cbl'
+
+- task: PowerShell@2
+  inputs:
+    filePath: 'C:\Users\cwde-rnuesse.EMEA\Software\Azure_DevOps_Scripts\TTT.ps1'
