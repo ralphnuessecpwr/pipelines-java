@@ -13,7 +13,9 @@ variables:
   ispwConfig: 'ispw'
   gitProject: 'ralphnussecpwr'
   gitRepo: 'FTSDEMO_$(ispwApplication)_Unit_Tests'
-  ccRepo: 'HDDRXM0.DEMO.COCO.REPO'
+  ccRepo: 'HDDRXM0.DEMO.COCO.REPOS'
+  ccSystem: 'AZURE_$(ispwContainerName)'
+  ccTestId: 'BUILD'
   sonarScannerPath: 'C:\Users\cwde-rnuesse.EMEA\Software\Sonar\Scanner\bin'
   sonarProjectName: 'RNU_Azure_ISPW'
   sonarSources: '.\$(ispwApplication)\MF_Source'
@@ -32,7 +34,12 @@ steps:
 - task: PowerShell@2
   inputs:
     filePath: '$(agentScriptsPath)\TTT.ps1'
-    arguments: '$(workspaceRoot) $(hostUri) $(hostPort) $(hostCodePage) $(ispwLevel) $(ccRepo)'
+    arguments: '$(workspaceRoot) $(hostUri) $(hostPort) $(hostCodePage) $(ispwLevel) $(ccRepo) $(ccSystem) $(ccTestId)'
+
+- task: PowerShell@2
+  inputs:
+    filePath: '$(agentScriptsPath)\Download_CoCo.ps1'
+    arguments: '$(workspaceRoot) $(hostUri) $(hostPort) $(hostCodePage) $(ispwApplication) $(ispwLevel) $(ccRepo) $(ccSystem) $(ccTestId)'
 
 #- task: BatchScript@1
 #  inputs:
