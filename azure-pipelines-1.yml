@@ -11,7 +11,7 @@ variables:
   hostPort: '16196'
   hostCodePage: '1047'
   ispwConfig: 'ispw'
-  gitProject: 'ralphnussecpwr'
+  gitProject: 'ralphnuessecpwr'
   gitRepo: 'FTSDEMO_$(ispwApplication)_Unit_Tests'
   ccRepo: 'HDDRXM0.DEMO.COCO.REPOS'
   ccSystem: 'AZURE_$(ispwContainerName)'
