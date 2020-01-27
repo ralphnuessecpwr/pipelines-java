@@ -16,6 +16,7 @@ variables:
   ccRepo: 'HDDRXM0.DEMO.COCO.REPOS'
   ccSystem: 'AZURE_$(ispwContainerName)'
   ccTestId: 'BUILD'
+  ccDdio: 'SALESSUP.$(ispwApplication).$(ispwLevel).LOAD.SSD'
   sonarScannerPath: 'C:\Users\cwde-rnuesse.EMEA\Software\Sonar\Scanner\bin'
   sonarProjectName: 'RNU_Azure_ISPW'
   sonarSources: '.\$(ispwApplication)\MF_Source'
@@ -39,7 +40,7 @@ steps:
 - task: PowerShell@2
   inputs:
     filePath: '$(agentScriptsPath)\Download_CoCo.ps1'
-    arguments: '$(workspaceRoot) $(hostUri) $(hostPort) $(hostCodePage) $(ispwApplication) $(ispwLevel) $(ccRepo) $(ccSystem) $(ccTestId)'
+    arguments: '$(workspaceRoot) $(hostUri) $(hostPort) $(hostCodePage) $(ispwApplication) $(ccRepo) $(ccSystem) $(ccTestId) $(ccDdio)'
 
 #- task: BatchScript@1
 #  inputs:
