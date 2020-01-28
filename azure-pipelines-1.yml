@@ -18,7 +18,7 @@ variables:
   ccTestId: 'BUILD'
   ccDdio: 'SALESSUP.$(ispwApplication).$(ispwLevel).LOAD.SSD'
   sonarScannerPath: 'C:\Users\cwde-rnuesse.EMEA\Software\Sonar\Scanner\bin'
-  sonarProjectName: 'RNU_Azure_ISPW'
+  sonarProjectName: 'RNU_$(ispwApplication)_Azure'
   sonarSources: '.\$(ispwApplication)\MF_Source'
 
 steps:
