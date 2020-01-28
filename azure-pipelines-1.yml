@@ -31,25 +31,25 @@ steps:
 # Execute Powershell Script to download sources from ISPW
 - task: PowerShell@2
   inputs:
-    filePath: '$(agentScriptsPath)\Download_ispw_cont.ps1'
+    filePath: '$(agentScriptsPath)\ISPW_Download_Container.ps1'
     arguments: '$(workspaceRoot) $(hostUri) $(hostPort) $(hostCodePage) $(ispwConfig) $(ispwContainerName) $(ispwContainerType) $(ispwLevel)'
 
 # Execute Powershell Script to clone TTT Assets from GitHub repo
 - task: PowerShell@2
   inputs:
-    filePath: '$(agentScriptsPath)\Git.ps1'
+    filePath: '$(agentScriptsPath)\Git_Clone_TTT_Repo.ps1'
     arguments: '$(workspaceRoot) $(gitProject)/$(gitRepo)'
 
 # Execute Powershell Script to run unit tests
 - task: PowerShell@2
   inputs:
-    filePath: '$(agentScriptsPath)\TTT.ps1'
+    filePath: '$(agentScriptsPath)\TTT_Run_Tests.ps1'
     arguments: '$(workspaceRoot) $(hostUri) $(hostPort) $(hostCodePage) $(ispwApplication) $(ispwLevel) $(ccRepo) $(ccSystem) $(ccTestId)'
 
 # Execute Powershell Script to download Code Coverage results
 - task: PowerShell@2
   inputs:
-    filePath: '$(agentScriptsPath)\Download_CoCo.ps1'
+    filePath: '$(agentScriptsPath)\Code_Coverage_Download_Metrics.ps1'
     arguments: '$(workspaceRoot) $(hostUri) $(hostPort) $(hostCodePage) $(ispwApplication) $(ccRepo) $(ccSystem) $(ccTestId) $(ccDdio)'
 
 #- task: BatchScript@1
