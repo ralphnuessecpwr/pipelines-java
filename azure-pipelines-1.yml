@@ -22,21 +22,25 @@ variables:
   sonarSources: '.\$(ispwApplication)\MF_Source'
 
 steps:
+# Execute Powershell Script to download sources from ISPW
 - task: PowerShell@2
   inputs:
     filePath: '$(agentScriptsPath)\Download_ispw_cont.ps1'
     arguments: '$(workspaceRoot) $(hostUri) $(hostPort) $(hostCodePage) $(ispwConfig) $(ispwContainerName) $(ispwContainerType) $(ispwLevel)'
 
+# Execute Powershell Script to clone TTT Assets from GitHub repo
 - task: PowerShell@2
   inputs:
     filePath: '$(agentScriptsPath)\Git.ps1'
     arguments: '$(workspaceRoot) $(gitProject)/$(gitRepo)'
 
+# Execute Powershell Script to run unit tests
 - task: PowerShell@2
   inputs:
     filePath: '$(agentScriptsPath)\TTT.ps1'
-    arguments: '$(workspaceRoot) $(hostUri) $(hostPort) $(hostCodePage) $(ispwLevel) $(ccRepo) $(ccSystem) $(ccTestId)'
+    arguments: '$(workspaceRoot) $(hostUri) $(hostPort) $(hostCodePage) $(ispwApplication) $(ispwLevel) $(ccRepo) $(ccSystem) $(ccTestId)'
 
+# Execute Powershell Script to download Code Coverage results
 - task: PowerShell@2
   inputs:
     filePath: '$(agentScriptsPath)\Download_CoCo.ps1'
