@@ -58,32 +58,32 @@ jobs:
       arguments: '$(workspaceRoot) $(hostUri) $(hostPort) $(hostUser) $(hostPassword) $(hostCodePage) $(ispwApplication) $(ccRepo) $(ccSystem) $(ccTestId) $(ccDdio) $(cliPath)'
 
   # Execute Powershell Script to run Sonar Scanner
-#  - task: PowerShell@2
+  - task: PowerShell@2
+    inputs:
+      filePath: '$(agentScriptsPath)\Sonar_Scan.ps1'
+      arguments: '$(workspaceRoot) $(ispwApplication) $(sonarProjectName) $(sonarSources)'
+
+#  - task: SonarQubePrepare@4
 #    inputs:
-#      filePath: '$(agentScriptsPath)\Sonar_Scan.ps1'
-#      arguments: '$(workspaceRoot) $(ispwApplication) $(sonarProjectName) $(sonarSources)'
+#      SonarQube: 'SonarQube'
+#      scannerMode: 'CLI'
+#      configMode: 'manual'
+#      cliProjectKey: '$(sonarProjectName)'
+#      cliProjectName: '$(sonarProjectName)'
+#      cliSources: '$(sonarSources)'
+#      extraProperties: |
+#        projectBaseDir=C:\Users\cwde-rnuesse.EMEA\Software\Azure_DevOps_Workspace
+#        sonar.cobol.copy.directories=RXN3\MF_Source
+#        sonar.cobol.copy.suffixes=cpy -Dsonar.cobol.file.suffixes=cbl,testsuite,testscenario,cpy,stub
+#        sonar.tests=tests
+#        sonar.testExecutionReportPaths=TTTSonar\CWXTCOB_Scenario.xml,TTTSonar\CWXTDATE_Scenario.xml,TTTSonar\CWXTSUBC_Mgmt_Scenario.xml,TTTSonar\CWXTSUBC_Sales_Scenario.xml,
+#        sonar.coverageReportPaths=Coverage/CodeCoverage.xml
 
-  - task: SonarQubePrepare@4
-    inputs:
-      SonarQube: 'SonarQube'
-      scannerMode: 'CLI'
-      configMode: 'manual'
-      cliProjectKey: '$(sonarProjectName)'
-      cliProjectName: '$(sonarProjectName)'
-      cliSources: '$(sonarSources)'
-      extraProperties: |
-        projectBaseDir=C:\Users\cwde-rnuesse.EMEA\Software\Azure_DevOps_Workspace
-        sonar.cobol.copy.directories=RXN3\MF_Source
-        sonar.cobol.copy.suffixes=cpy -Dsonar.cobol.file.suffixes=cbl,testsuite,testscenario,cpy,stub
-        sonar.tests=tests
-        sonar.testExecutionReportPaths=TTTSonar\CWXTCOB_Scenario.xml,TTTSonar\CWXTDATE_Scenario.xml,TTTSonar\CWXTSUBC_Mgmt_Scenario.xml,TTTSonar\CWXTSUBC_Sales_Scenario.xml,
-        sonar.coverageReportPaths=Coverage/CodeCoverage.xml
+#  - task: SonarQubeAnalyze@4
 
-  - task: SonarQubeAnalyze@4
-
-  - task: SonarQubePublish@4
-    inputs:
-      pollingTimeoutSec: '300'
+#  - task: SonarQubePublish@4
+#    inputs:
+#      pollingTimeoutSec: '300'
 
   # Execute Powershell Script to check Sonar Quality Gate
   - task: PowerShell@2
