@@ -21,6 +21,7 @@ variables:
   sonarScannerPath: 'C:\Users\cwde-rnuesse.EMEA\Software\Sonar\Scanner\bin'
   sonarProjectName: 'RNU_$(ispwApplication)_Azure'
   sonarSources: '.\$(ispwApplication)\MF_Source'
+  sonarServer: 'http://sonarqube.nasa.cpwr.corp:9000'
 
 steps:
 # Execute Powershell Script to clear Workspace
@@ -58,3 +59,9 @@ steps:
   inputs:
     filePath: '$(agentScriptsPath)\Sonar_Scan.ps1'
     arguments: '$(workspaceRoot) $(ispwApplication) $(sonarProjectName) $(sonarSources)'
+
+# Execute Powershell Script to check Sonar Quality Gate
+- task: PowerShell@2
+  inputs:
+    filePath: '$(agentScriptsPath)\Sonar_Check_Quality_Gate .ps1'
+    arguments: '$(sonarServer) $(ispwApplication) $(sonarAuthorization)'
