@@ -85,6 +85,11 @@ jobs:
 #    inputs:
 #      pollingTimeoutSec: '300'
 
+- job: checkQualityGate
+  displayName: Check Quality Gate
+  dependsOn: runTests
+  pool: Azure Pipelines
+  steps:
   # Execute Powershell Script to check Sonar Quality Gate
   - task: InvokeRESTAPI@1
     inputs:
@@ -106,7 +111,7 @@ jobs:
 #      arguments: '$(sonarServer) $(sonarProjectName) $(sonarAuthorization)'
 
 - job: startRelease
-  dependsOn: runTests
+  dependsOn: checkQualityGate
   condition: succeeded()
   steps:
   - task: PowerShell@2
@@ -116,7 +121,7 @@ jobs:
         Write-Host "Would trigger Release"
 
 - job: regressAssignment
-  dependsOn: runTests
+  dependsOn: checkQualityGate
   condition: failed()
   steps:
   - task: PowerShell@2
