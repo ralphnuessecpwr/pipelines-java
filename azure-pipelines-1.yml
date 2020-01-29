@@ -65,6 +65,7 @@ jobs:
 
   - task: SonarQubePrepare@4
     inputs:
+      SonarQube: 'SonarQube'
       scannerMode: 'CLI'
       configMode: 'manual'
       cliProjectKey: '$(sonarProjectName)'
