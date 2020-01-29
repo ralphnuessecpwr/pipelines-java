@@ -80,7 +80,7 @@ jobs:
         Write-Host "Would trigger Release"
 
 - job: regressAssignment
-  dependsOn: runTest
+  dependsOn: runTests
   condition: failed()
   steps:
   - task: PowerShell@2
