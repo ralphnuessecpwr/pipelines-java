@@ -86,10 +86,24 @@ jobs:
 #      pollingTimeoutSec: '300'
 
   # Execute Powershell Script to check Sonar Quality Gate
-  - task: PowerShell@2
-    inputs:
-      filePath: '$(agentScriptsPath)\Sonar_Check_Quality_Gate.ps1'
-      arguments: '$(sonarServer) $(sonarProjectName) $(sonarAuthorization)'
+- task: InvokeRESTAPI@1
+  inputs:
+    connectionType: 'connectedServiceName'
+    serviceConnection: 'SonarQube REST'
+    method: 'GET'
+    headers: |
+      {
+      "Content-Type":"application/json", 
+      "AuthToken": "$(sonarAuthorization)"
+      }
+    urlSuffix: '/api/qualitygates/project_status?projectKey=$(sonarProjectName)'
+    waitForCompletion: 'true'
+    successCriteria: 'eq(projectStatus[''status''], ''OK'')'
+
+#  - task: PowerShell@2
+#    inputs:
+#      filePath: '$(agentScriptsPath)\Sonar_Check_Quality_Gate.ps1'
+#      arguments: '$(sonarServer) $(sonarProjectName) $(sonarAuthorization)'
 
 - job: startRelease
   dependsOn: runTests
