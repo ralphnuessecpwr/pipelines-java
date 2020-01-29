@@ -63,5 +63,5 @@ steps:
 # Execute Powershell Script to check Sonar Quality Gate
 - task: PowerShell@2
   inputs:
-    filePath: '$(agentScriptsPath)\Sonar_Check_Quality_Gate .ps1'
+    filePath: '$(agentScriptsPath)\Sonar_Check_Quality_Gate.ps1'
     arguments: '$(sonarServer) $(ispwApplication) $(sonarAuthorization)'
