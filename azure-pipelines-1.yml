@@ -125,15 +125,15 @@ stages:
         filePath: '$(agentScriptsPath)\Sonar_Check_Quality_Gate.ps1'
         arguments: '$(sonarServer) $(sonarProjectName) $(sonarAuthorization)'
 
-  - job: startRelease
-    dependsOn: checkQualityGate
-    condition: succeeded()
-    steps:
-    - task: PowerShell@2
-      inputs:
-        targetType: 'inline'
-        script: |
-          Write-Host "Would trigger Release"
+#  - job: startRelease
+#    dependsOn: checkQualityGate
+#    condition: succeeded()
+#    steps:
+#    - task: PowerShell@2
+#      inputs:
+#        targetType: 'inline'
+#        script: |
+#          Write-Host "Would trigger Release"
 
   - job: regressAssignment
     dependsOn: checkQualityGate
@@ -144,3 +144,8 @@ stages:
         targetType: 'inline'
         script: |
           Write-Host "Would regress code."
+
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: '$LASTEXITCODE = 1'
