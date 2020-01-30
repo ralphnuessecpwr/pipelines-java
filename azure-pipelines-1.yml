@@ -51,6 +51,7 @@ stages:
   jobs:
   - job: runTests
     displayName: Run unit tests and get results
+    steps:
     # Execute Powershell Script to run unit tests
     - task: PowerShell@2
       inputs:
@@ -67,6 +68,7 @@ stages:
   jobs:
   - job: Sonar
     displayName: run Sonar Scan, Check Quality Gate
+    steps:
     # Execute Powershell Script to run Sonar Scanner
     - task: PowerShell@2
       inputs:
