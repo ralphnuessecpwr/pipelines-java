@@ -132,7 +132,6 @@ stages:
   #      urlSuffix: '/api/qualitygates/project_status?projectKey=$(sonarProjectName)'
   #      waitForCompletion: 'true'
   #      successCriteria: 'eq(projectStatus[''status''], ''OK'')'
-
     - task: PowerShell@2
       inputs:
         filePath: '$(agentScriptsPath)\Sonar_Check_Quality_Gate.ps1'
@@ -155,10 +154,5 @@ stages:
           echo "##vso[task.setvariable variable=ispwTargetLevel]$ispwTargetLevel"
     - task: PowerShell@2
       inputs:
-        targetType: 'inline'
-        script: 'Write-Host ''Level '' $ispwTargetLevel'
-
-#    - task: PowerShell@2
-#      inputs:
-#        filePath: '$(agentScriptsPath)\ISPW_Operations.ps1'
-#        arguments: 'ContainerOperation $(cesUrl) $(ispwConfig) assignments regress $(ispwContainerName) $(ispwTargetLevel) $(cesToken) FTSDEMO $(ispwApplication) $(ispwServer)'
+        filePath: '$(agentScriptsPath)\ISPW_Operations.ps1'
+        arguments: 'ContainerOperation $(cesUrl) $(ispwConfig) assignments regress $(ispwContainerName) $(ispwTargetLevel) $(cesToken) FTSDEMO $(ispwApplication) $(ispwServer)'
