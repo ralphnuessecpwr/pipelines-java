@@ -142,13 +142,13 @@ stages:
     variables: 
       ispwTargetLevel: $[ dependencies.getAssets.outputs['setTargetLevel.ispwTargetLevel'] ]
     dependsOn: getAssets, checkQualityGate
-    condition: failed(checkQualityGate)
+    condition: failed('checkQualityGate')
     steps:
     - task: PowerShell@2
       inputs:
         targetType: 'inline'
         script: 'Write-Host ''Level '' $ispwTargetLevel'
-        
+
 #    - task: PowerShell@2
 #      inputs:
 #        filePath: '$(agentScriptsPath)\ISPW_Operations.ps1'
