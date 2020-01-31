@@ -12,7 +12,6 @@ variables:
   hostCodePage: '1047'
   ispwConfig: 'ispw'
   ispwServer: 'ispw'
-  ispwTargetLevel: $[variables.ispwLevel]
   cesUrl: 'cwcc.compuware.com:2020'
   gitProject: 'ralphnuessecpwr'
   gitRepo: 'FTSDEMO_$(ispwApplication)_Unit_Tests'
