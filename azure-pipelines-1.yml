@@ -30,6 +30,11 @@ stages:
   - job: getAssets
     displayName: Get Assets from Mainframe and GitHub
     steps:
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: '$ispwTargetLevel = ''QA'' + $ispwLevel.Substring($ispwLevel.Length -1, 1)'
+
     # Execute Powershell Script to clear Workspace
     - task: PowerShell@2
       inputs:
@@ -40,7 +45,7 @@ stages:
     - task: PowerShell@2
       inputs:
         filePath: '$(agentScriptsPath)\ISPW_Download_Container.ps1'
-        arguments: '$(workspaceRoot) $(hostUri) $(hostPort) $(hostUser) $(hostPassword) $(hostCodePage) $(ispwConfig) $(ispwContainerName) $(ispwContainerType) $(ispwLevel) $(cliPath)'
+        arguments: '$(workspaceRoot) $(hostUri) $(hostPort) $(hostUser) $(hostPassword) $(hostCodePage) $(ispwConfig) $(ispwContainerName) $(ispwContainerType) $(ispwTargetLevel) $(cliPath)'
 
     # Execute Powershell Script to clone TTT Assets from GitHub repo
     - task: PowerShell@2
