@@ -33,7 +33,7 @@ stages:
     - task: PowerShell@2
       inputs:
         targetType: 'inline'
-        script: '$ispwTargetLevel = ''QA'' + toString($(ispwLevel)).Substring(toString($(ispwLevel)).Length -1, 1)'
+        script: '$ispwTargetLevel = ''QA'' + ''$(ispwLevel)''.Substring(''$(ispwLevel)'').Length -1, 1)'
 
     # Execute Powershell Script to clear Workspace
     - task: PowerShell@2
