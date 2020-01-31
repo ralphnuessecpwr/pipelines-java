@@ -12,7 +12,7 @@ variables:
   hostCodePage: '1047'
   ispwConfig: 'ispw'
   ispwServer: 'ispw'
-  ispwTargetLevel: $[join('QA',$(ispwLevel).substring($(ispwLevel).length - 1, 1))]
+  ispwTargetLevel: $[join('QA',variables['ispwLevel'].substring(variables['ispwLevel']).length - 1, 1))]
   cesUrl: 'cwcc.compuware.com:2020'
   gitProject: 'ralphnuessecpwr'
   gitRepo: 'FTSDEMO_$(ispwApplication)_Unit_Tests'
