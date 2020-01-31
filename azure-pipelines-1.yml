@@ -35,6 +35,7 @@ stages:
     # After promote ISPW passes the DEV level name, we need the QA level name, though
     # Determine QA level name from DEV level name and create a new pipeline variable
     - task: PowerShell@2
+      name: setTargetLevel
       inputs:
         targetType: 'inline'
         script: |
@@ -137,21 +138,18 @@ stages:
         filePath: '$(agentScriptsPath)\Sonar_Check_Quality_Gate.ps1'
         arguments: '$(sonarServer) $(sonarProjectName) $(sonarAuthorization)'
 
-#  - job: startRelease
-#    dependsOn: checkQualityGate
-#    condition: succeeded()
-#    steps:
-#    - task: PowerShell@2
-#      inputs:
-#        targetType: 'inline'
-#        script: |
-#          Write-Host "Would trigger Release"
-
   - job: regressAssignment
-    dependsOn: checkQualityGate
-    condition: failed()
+    variables: 
+      ispwTargetLevel: $[ dependencies.getAssets.outputs['setTargetLevel.ispwTargetLevel'] ]
+    dependsOn: getAssets, checkQualityGate
+    condition: failed(checkQualityGate)
     steps:
     - task: PowerShell@2
       inputs:
-        filePath: '$(agentScriptsPath)\ISPW_Operations.ps1'
-        arguments: 'ContainerOperation $(cesUrl) $(ispwConfig) assignments regress $(ispwContainerName) $(ispwTargetLevel) $(cesToken) FTSDEMO $(ispwApplication) $(ispwServer)'
+        targetType: 'inline'
+        script: 'Write-Host ''Level '' $ispwTargetLevel'
+        
+#    - task: PowerShell@2
+#      inputs:
+#        filePath: '$(agentScriptsPath)\ISPW_Operations.ps1'
+#        arguments: 'ContainerOperation $(cesUrl) $(ispwConfig) assignments regress $(ispwContainerName) $(ispwTargetLevel) $(cesToken) FTSDEMO $(ispwApplication) $(ispwServer)'
