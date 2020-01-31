@@ -35,7 +35,7 @@ stages:
         targetType: 'inline'
         script: |
           '$ispwTargetLevel = ''QA'' + ''$(ispwLevel)''.Substring(''$(ispwLevel)''.Length - 1, 1)'
-          Write-Host 'Determined Level $ispwTarget'
+          Write-Host 'Determined Level $ispwTargetLevel'
           Write-Host "##vso[task.setvariable variable=ispwTargetLevel]$ispwTargetLevel"
 
     # Execute Powershell Script to clear Workspace
