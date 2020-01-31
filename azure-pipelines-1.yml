@@ -142,7 +142,7 @@ stages:
     variables: 
       ispwTargetLevel: $[ dependencies.getAssets.outputs['setTargetLevel.ispwTargetLevel'] ]
     dependsOn: 
-    - getAssets
+    - preparation
     - checkQualityGate
     condition: failed('checkQualityGate')
     steps:
