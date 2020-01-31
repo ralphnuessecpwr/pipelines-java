@@ -141,7 +141,9 @@ stages:
   - job: regressAssignment
     variables: 
       ispwTargetLevel: $[ dependencies.getAssets.outputs['setTargetLevel.ispwTargetLevel'] ]
-    dependsOn: getAssets, checkQualityGate
+    dependsOn: 
+    - getAssets
+    - checkQualityGate
     condition: failed('checkQualityGate')
     steps:
     - task: PowerShell@2
