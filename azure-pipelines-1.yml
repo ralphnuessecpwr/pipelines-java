@@ -11,6 +11,8 @@ variables:
   hostPort: '16196'
   hostCodePage: '1047'
   ispwConfig: 'ispw'
+  ispwServer: 'ispw'
+  cesUrl: 'cwcc.compuware.com:2020'
   gitProject: 'ralphnuessecpwr'
   gitRepo: 'FTSDEMO_$(ispwApplication)_Unit_Tests'
   cliPath: 'C:\Users\cwde-rnuesse.EMEA\Software\Compuware\TopazCLI'
@@ -30,6 +32,8 @@ stages:
   - job: getAssets
     displayName: Get Assets from Mainframe and GitHub
     steps:
+    # After promote ISPW passes the DEV level name, we need the QA level name, though
+    # Determine QA level name from DEV level name and create a new pipeline variable
     - task: PowerShell@2
       inputs:
         targetType: 'inline'
@@ -149,6 +153,5 @@ stages:
     steps:
     - task: PowerShell@2
       inputs:
-        targetType: 'inline'
-        script: |
-          Write-Host "Would regress code."
+        filePath: '$(agentScriptsPath)\ISPW_Operations.ps1'
+        arguments: 'ContainerOperation $(cesUrl) $(ispwConfig) assignments regress $(ispwContainerName) $(ispwTargetLevel) $(cesToken) FTSDEMO $(ispwApplication) $(ispwServer)'
