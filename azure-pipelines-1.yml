@@ -4,6 +4,7 @@ pool:
   name: 'Default'
 
 variables:
+- group: mainframe-pipeline-parameters
 #  agentScriptsPath: 'C:\Users\cwde-rnuesse.EMEA\Software\Azure_DevOps_Scripts'
 #  workspaceRoot: 'C:\Users\cwde-rnuesse.EMEA\Software\Azure_DevOps_Workspace'
 #  hostUri: 'cwcc.compuware.com'
@@ -13,15 +14,15 @@ variables:
 #  ispwServer: 'ispw'
 #  cesUrl: 'cwcc.compuware.com:2020'
 #  gitProject: 'ralphnuessecpwr'
-  gitRepo: 'FTSDEMO_$(ispwApplication)_Unit_Tests'
+#  gitRepo: 'FTSDEMO_$(ispwApplication)_Unit_Tests'
 #  cliPath: 'C:\Users\cwde-rnuesse.EMEA\Software\Compuware\TopazCLI'
 #  ccRepo: 'HDDRXM0.DEMO.COCO.REPOS'
-  ccSystem: 'AZURE_$(ispwContainerName)'
+#  ccSystem: 'AZURE_$(ispwContainerName)'
 #  ccTestId: 'BUILD'
-  ccDdio: 'SALESSUP.$(ispwApplication).$(ispwLevel).LOAD.SSD'
+#  ccDdio: 'SALESSUP.$(ispwApplication).$(ispwLevel).LOAD.SSD'
 #  sonarScannerPath: 'C:\Users\cwde-rnuesse.EMEA\Software\Sonar\Scanner\bin'
-  sonarProjectName: 'RNU_$(ispwApplication)_Azure'
-  sonarSources: '.\$(ispwApplication)\MF_Source'
+#  sonarProjectName: 'RNU_$(ispwApplication)_Azure'
+#  sonarSources: '.\$(ispwApplication)\MF_Source'
 #  sonarServer: 'http://sonarqube.nasa.cpwr.corp:9000'
 
 stages:
