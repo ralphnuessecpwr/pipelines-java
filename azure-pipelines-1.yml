@@ -14,15 +14,20 @@ variables:
 #  ispwServer: 'ispw'
 #  cesUrl: 'cwcc.compuware.com:2020'
 #  gitProject: 'ralphnuessecpwr'
-#  gitRepo: 'FTSDEMO_$(ispwApplication)_Unit_Tests'
+- name: gitRepo
+  value: 'FTSDEMO_$(ispwApplication)_Unit_Tests'
 #  cliPath: 'C:\Users\cwde-rnuesse.EMEA\Software\Compuware\TopazCLI'
 #  ccRepo: 'HDDRXM0.DEMO.COCO.REPOS'
-#  ccSystem: 'AZURE_$(ispwContainerName)'
+- name: ccSystem
+  value: 'AZURE_$(ispwContainerName)'
 #  ccTestId: 'BUILD'
-#  ccDdio: 'SALESSUP.$(ispwApplication).$(ispwLevel).LOAD.SSD'
+- name: ccDdio
+  value: 'SALESSUP.$(ispwApplication).$(ispwLevel).LOAD.SSD'
 #  sonarScannerPath: 'C:\Users\cwde-rnuesse.EMEA\Software\Sonar\Scanner\bin'
-#  sonarProjectName: 'RNU_$(ispwApplication)_Azure'
-#  sonarSources: '.\$(ispwApplication)\MF_Source'
+- name: sonarProjectName
+  value: 'RNU_$(ispwApplication)_Azure'
+- name: sonarSources
+  value: '.\$(ispwApplication)\MF_Source'
 #  sonarServer: 'http://sonarqube.nasa.cpwr.corp:9000'
 
 stages:
