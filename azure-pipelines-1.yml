@@ -3,7 +3,7 @@ trigger: none
 pool:
   name: 'Default'
 
-variables:
+#variables:
 #  agentScriptsPath: 'C:\Users\cwde-rnuesse.EMEA\Software\Azure_DevOps_Scripts'
 #  workspaceRoot: 'C:\Users\cwde-rnuesse.EMEA\Software\Azure_DevOps_Workspace'
 #  hostUri: 'cwcc.compuware.com'
