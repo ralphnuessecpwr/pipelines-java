@@ -4,6 +4,10 @@ pool:
   name: 'Default'
 
 variables:
+  azureRestAddress: 'https://vsrm.dev.azure.com'
+  azureOrganization: 'ralphnuesse'
+  azureProject: 'ralphnuesse'
+  releaseDefinitionId: '1'
   agentScriptsPath: 'C:\Users\cwde-rnuesse.EMEA\Software\Azure_DevOps_Scripts'
   workspaceRoot: 'C:\Users\cwde-rnuesse.EMEA\Software\Azure_DevOps_Workspace'
   hostUri: 'cwcc.compuware.com'
@@ -106,27 +110,10 @@ stages:
     - checkQualityGate
     condition: succeeded('checkQualityGate')
     steps:
-    - task: InvokeRESTAPI@1
+    - task: PowerShell@2
       inputs:
-        connectionType: 'connectedServiceName'
-        serviceConnection: 'Azure REST'
-        method: 'POST'
-        headers: |
-          {
-          "Content-Type":"application/json", 
-          "AuthToken": "ymrtl6kdvqiiblr4kw2g5g5kxrk42uevows5v6pai44gbzlp2nvq"
-          } 
-        body: |
-          {
-            "definitionId": "1",
-            "variables": {
-              "ispwApplication": {
-                "value": "RXN3"
-              }
-            }
-          }
-        urlSuffix: 'ralphnuesse/ralphnuesse/_apis/release/releases?api-version=5.1'
-        waitForCompletion: 'true'
+        filePath: '$(agentScriptsPath)\Azure_Trigger_Release.ps1'
+        arguments: '$(azureRestAddress) $(azureOrganization) $(azureProject) $(azureRestAuthorization) $(ispwApplication) $(ispwContainerName) $(ispwContainerType) $(ispwLevel) $(releaseDefinitionId)'
 
   - job: regressAssignment
     dependsOn: 
