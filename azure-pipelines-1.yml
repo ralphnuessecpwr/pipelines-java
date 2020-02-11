@@ -114,7 +114,7 @@ stages:
         headers: |
           {
           "Content-Type":"application/json", 
-          "AuthToken": "$(system.AccessToken)"
+          "AuthToken": "ymrtl6kdvqiiblr4kw2g5g5kxrk42uevows5v6pai44gbzlp2nvq"
           } 
         body: |
           {
