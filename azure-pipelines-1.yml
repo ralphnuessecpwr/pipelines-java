@@ -113,7 +113,7 @@ stages:
     - task: PowerShell@2
       inputs:
         filePath: '$(agentScriptsPath)\Azure_Trigger_Release.ps1'
-        arguments: '$(azureRestAddress) $(azureOrganization) $(azureProject) $(azureRestAuthorization) $(ispwApplication) $(ispwContainerName) $(ispwContainerType) $(ispwLevel) $(releaseDefinitionId)'
+        arguments: '$(azureRestAddress) $(azureOrganization) $(azureProject) "$(azureRestAuthorization)" $(ispwApplication) $(ispwContainerName) $(ispwContainerType) $(ispwLevel) $(releaseDefinitionId)'
 
   - job: regressAssignment
     dependsOn: 
