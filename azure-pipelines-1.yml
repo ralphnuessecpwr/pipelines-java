@@ -90,51 +90,23 @@ stages:
         filePath: '$(agentScriptsPath)\Sonar_Scan.ps1'
         arguments: '$(workspaceRoot) $(ispwApplication) $(sonarProjectName) $(sonarSources)'
 
-  #  - task: SonarQubePrepare@4
-  #    inputs:
-  #      SonarQube: 'SonarQube'
-  #      scannerMode: 'CLI'
-  #      configMode: 'manual'
-  #      cliProjectKey: '$(sonarProjectName)'
-  #      cliProjectName: '$(sonarProjectName)'
-  #      cliSources: '$(sonarSources)'
-  #      extraProperties: |
-  #        projectBaseDir=C:\Users\cwde-rnuesse.EMEA\Software\Azure_DevOps_Workspace
-  #        sonar.cobol.copy.directories=RXN3\MF_Source
-  #        sonar.cobol.copy.suffixes=cpy -Dsonar.cobol.file.suffixes=cbl,testsuite,testscenario,cpy,stub
-  #        sonar.tests=tests
-  #        sonar.testExecutionReportPaths=TTTSonar\CWXTCOB_Scenario.xml,TTTSonar\CWXTDATE_Scenario.xml,TTTSonar\CWXTSUBC_Mgmt_Scenario.xml,TTTSonar\CWXTSUBC_Sales_Scenario.xml,
-  #        sonar.coverageReportPaths=Coverage/CodeCoverage.xml
-
-  #  - task: SonarQubeAnalyze@4
-
-  #  - task: SonarQubePublish@4
-  #    inputs:
-  #      pollingTimeoutSec: '300'
-
   - job: checkQualityGate
     displayName: Check Quality Gate
     dependsOn: sonar
-    #pool: server
     steps:
     # Execute Powershell Script to check Sonar Quality Gate
-  #  - task: InvokeRESTAPI@1
-  #    inputs:
-  #      connectionType: 'connectedServiceName'
-  #      serviceConnection: 'SonarQube REST'
-  #      method: 'GET'
-  #      headers: |
-  #        {
-  #        "Content-Type":"application/json", 
-  #        "AuthToken": "$(sonarAuthorization)"
-  #        }
-  #      urlSuffix: '/api/qualitygates/project_status?projectKey=$(sonarProjectName)'
-  #      waitForCompletion: 'true'
-  #      successCriteria: 'eq(projectStatus[''status''], ''OK'')'
     - task: PowerShell@2
       inputs:
         filePath: '$(agentScriptsPath)\Sonar_Check_Quality_Gate.ps1'
         arguments: '$(sonarServer) $(sonarProjectName) $(sonarAuthorization)'
+
+  - job: triggerRelease
+    displayName: Trigger Release Pipeline
+    dependsOn: 
+    - checkQualityGate
+    condition: succeeded('checkQualityGate')
+    steps:
+    - task: 
 
   - job: regressAssignment
     dependsOn: 
