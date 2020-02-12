@@ -143,4 +143,4 @@ stages:
       displayName: Regress Assignment
       inputs:
         filePath: '$(agentScriptsPath)\ISPW_Operations.ps1'
-        arguments: 'ContainerOperation $(cesUrl) $(ispwConfig) assignments regress $(ispwContainerName) $(ispwTargetLevel) $(cesToken) FTSDEMO $(ispwApplication) $(ispwServer)'
+        arguments: 'ContainerOperation $(cesUri) $(ispwConfig) assignments regress $(ispwContainerName) $(ispwTargetLevel) $(cesToken) FTSDEMO $(ispwApplication) $(ispwServer)'
