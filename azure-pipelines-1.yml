@@ -49,6 +49,7 @@ stages:
     # After promote ISPW passes the DEV level name, we need the QA level name, though
     # Determine QA level name from DEV level name and create a new pipeline variable
     - task: PowerShell@2
+      displayName: Determine ISPW Target Level
       name: setTargetLevel
       inputs:
         targetType: 'inline'
@@ -59,18 +60,21 @@ stages:
 
     # Execute Powershell Script to clear Workspace
     - task: PowerShell@2
+      displayName: Clear Workspace
       inputs:
         filePath: '$(agentScriptsPath)\Clear_Workspace.ps1'
         arguments: '$(workspaceRoot)'
 
     # Execute Powershell Script to download sources from ISPW
     - task: PowerShell@2
+      displayName: Download sources for assignment
       inputs:
         filePath: '$(agentScriptsPath)\ISPW_Download_Container.ps1'
         arguments: '$(workspaceRoot) $(hostUri) $(hostPort) $(hostUser) $(hostPassword) $(hostCodePage) $(ispwConfig) $(ispwContainerName) $(ispwContainerType) $(ispwTargetLevel) $(cliPath)'
 
     # Execute Powershell Script to clone TTT Assets from GitHub repo
     - task: PowerShell@2
+      displayName: Get Unit Tests
       inputs:
         filePath: '$(agentScriptsPath)\Git_Clone_TTT_Repo.ps1'
         arguments: '$(workspaceRoot) $(gitProject)/$(gitRepo)'
@@ -83,12 +87,14 @@ stages:
     steps:
     # Execute Powershell Script to run unit tests
     - task: PowerShell@2
+      displayName: Execute Unit Tests
       inputs:
         filePath: '$(agentScriptsPath)\TTT_Run_Tests.ps1'
         arguments: '$(workspaceRoot) $(hostUri) $(hostPort) $(hostUser) $(hostPassword) $(hostCodePage) $(ispwApplication) $(ispwLevel) $(ccRepo) $(ccSystem) $(ccTestId) $(cliPath)'
 
     # Execute Powershell Script to download Code Coverage results
     - task: PowerShell@2
+      displayName: Get Code Coverage Results
       inputs:
         filePath: '$(agentScriptsPath)\Code_Coverage_Download_Metrics.ps1'
         arguments: '$(workspaceRoot) $(hostUri) $(hostPort) $(hostUser) $(hostPassword) $(hostCodePage) $(ispwApplication) $(ccRepo) $(ccSystem) $(ccTestId) $(ccDdio) $(cliPath)'
@@ -101,6 +107,7 @@ stages:
     steps:
     # Execute Powershell Script to run Sonar Scanner
     - task: PowerShell@2
+      displayName: Run Sonar Scanner
       inputs:
         filePath: '$(agentScriptsPath)\Sonar_Scan.ps1'
         arguments: '$(workspaceRoot) $(ispwApplication) $(sonarProjectName) $(sonarSources)'
@@ -111,6 +118,7 @@ stages:
     steps:
     # Execute Powershell Script to check Sonar Quality Gate
     - task: PowerShell@2
+      displayName: Check Sonar Quality Gate
       inputs:
         filePath: '$(agentScriptsPath)\Sonar_Check_Quality_Gate.ps1'
         arguments: '$(sonarServer) $(sonarProjectName) $(sonarAuthorization)'
@@ -125,6 +133,7 @@ stages:
     # Determine QA level name from DEV level name and create a new pipeline variable
     - task: PowerShell@2
       name: setTargetLevel
+      displayName: Determine ISPW Target Level
       inputs:
         targetType: 'inline'
         script: |
@@ -132,6 +141,7 @@ stages:
           Write-Host 'Determined Level ' $ispwTargetLevel
           echo "##vso[task.setvariable variable=ispwTargetLevel]$ispwTargetLevel"
     - task: PowerShell@2
+      displayName: Trigger Release
       inputs:
         filePath: '$(agentScriptsPath)\Azure_Trigger_Release.ps1'
         arguments: '$(azureRestAddress) $(azureOrganization) $(System.TeamProject) "$(azureRestAuthorization)" $(ispwApplication) $(ispwContainerName) $(ispwContainerType) $(ispwTargetLevel) $(releaseDefinitionId)'
@@ -144,6 +154,7 @@ stages:
     # After promote ISPW passes the DEV level name, we need the QA level name, though
     # Determine QA level name from DEV level name and create a new pipeline variable
     - task: PowerShell@2
+      displayName: Determine ISPW Target Level
       name: setTargetLevel
       inputs:
         targetType: 'inline'
@@ -152,6 +163,7 @@ stages:
           Write-Host 'Determined Level ' $ispwTargetLevel
           echo "##vso[task.setvariable variable=ispwTargetLevel]$ispwTargetLevel"
     - task: PowerShell@2
+      displayName: Regress Assignment
       inputs:
         filePath: '$(agentScriptsPath)\ISPW_Operations.ps1'
         arguments: 'ContainerOperation $(cesUrl) $(ispwConfig) assignments regress $(ispwContainerName) $(ispwTargetLevel) $(cesToken) FTSDEMO $(ispwApplication) $(ispwServer)'
