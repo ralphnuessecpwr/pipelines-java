@@ -121,7 +121,7 @@ stages:
       displayName: Trigger Release
       inputs:
         filePath: '$(agentScriptsPath)\Azure_Trigger_Release.ps1'
-        arguments: '$(azureRestAddress) $(azureOrganization) $(System.TeamProject) "$(RalphAzure)" $(ispwApplication) $(ispwContainerName) $(ispwContainerType) $(ispwTargetLevel) $(releaseDefinitionId)'
+        arguments: '$(azureRestAddress) $(azureOrganization) $(System.TeamProject) "$(azureRestAuthorization)" $(ispwApplication) $(ispwContainerName) $(ispwContainerType) $(ispwTargetLevel) $(releaseDefinitionId)'
 
   - job: regressAssignment
     dependsOn: 
