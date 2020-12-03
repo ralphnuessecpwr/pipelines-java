@@ -9,9 +9,9 @@ variables:
 - name: 'jobMaxCc'
   value: '4'
 - name: 'jclDsn1'
-  value: 'hddrxm0.demo.jcl(cwxtjcl)'
+  value: 'hddrxm0.demo.jcl(cwxtjclc)'
 - name: 'jclDsn2'
-  value: 'hddrxm0.demo.jcl(cwxtjcl)'
+  value: 'hddrxm0.demo.jcl(cwxtjclc)'
 
 steps:
 - task: BatchScript@1
