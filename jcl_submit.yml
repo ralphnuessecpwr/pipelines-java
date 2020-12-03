@@ -18,7 +18,7 @@ steps:
   inputs:
     filename: '$(agentScriptsPath)\Topaz_Submit_JCL_Member.bat'
     arguments: '$(cliPath) $(workspaceRoot) $(hostUri) $(hostPort) $(hostUser) $(hostPassword) $(hostCodePage) $(jobMaxCc) "$(jclDsn1)"'
-- task: BatchScript@2
+- task: BatchScript@1
   inputs:
     filename: '$(agentScriptsPath)\Topaz_Submit_JCL_Member.bat'
     arguments: '$(cliPath) $(workspaceRoot) $(hostUri) $(hostPort) $(hostUser) $(hostPassword) $(hostCodePage) $(jobMaxCc) "$(jclDsn1),$(jclDsn2)"'
