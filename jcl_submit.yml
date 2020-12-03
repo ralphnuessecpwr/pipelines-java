@@ -13,11 +13,11 @@ variables:
 - name: 'jclDsn2'
   value: 'hddrxm0.demo.jcl(cwxtjcl)'
 
+steps:
 - task: BatchScript@1
   inputs:
     filename: '$(agentScriptsPath)\Topaz_Submit_JCL_Member.bat'
     arguments: '$(cliPath) $(workspaceRoot) $(hostUri) $(hostPort) $(hostUser) $(hostPassword) $(hostCodePage) $(jobMaxCc) "$(jclDsn1)"'
-
 - task: BatchScript@2
   inputs:
     filename: '$(agentScriptsPath)\Topaz_Submit_JCL_Member.bat'
