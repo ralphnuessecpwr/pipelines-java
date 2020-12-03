@@ -1,0 +1,24 @@
+trigger:
+- none
+
+pool:
+  name: 'Default'
+
+variables:
+- group: 'mainframe-pipeline-parameters'
+- name: 'jobMaxCc'
+  value: '4'
+- name: 'jclDsn1'
+  value: 'hddrxm0.demo.jcl(cwxtjcl)'
+- name: 'jclDsn2'
+  value: 'hddrxm0.demo.jcl(cwxtjcl)'
+
+- task: BatchScript@1
+  inputs:
+    filename: '$(agentScriptsPath)\Topaz_Submit_JCL_Member.bat'
+    arguments: '$(cliPath) $(workspaceRoot) $(hostUri) $(hostPort) $(hostUser) $(hostPassword) $(hostCodePage) $(jobMaxCc) "$(jclDsn1)"'
+
+- task: BatchScript@2
+  inputs:
+    filename: '$(agentScriptsPath)\Topaz_Submit_JCL_Member.bat'
+    arguments: '$(cliPath) $(workspaceRoot) $(hostUri) $(hostPort) $(hostUser) $(hostPassword) $(hostCodePage) $(jobMaxCc) "$(jclDsn1),$(jclDsn2)"'
